@@ -344,6 +344,7 @@ class CPURenderedFontAtlasPage extends FontAtlasPageBase<CPURenderedCachedGlyph>
     // Manually copy the image data across
     let glyphOffset = 0;
 
+    const table = computeContrastTable(128);
 
     for (let y=0; y<heightPx; y++) {
 
@@ -361,7 +362,7 @@ class CPURenderedFontAtlasPage extends FontAtlasPageBase<CPURenderedCachedGlyph>
         destOffset++
         glyphOffset++
 
-        destData[destOffset] = glyphData[glyphOffset];
+        destData[destOffset] = table[glyphData[glyphOffset]];
         destOffset++
         glyphOffset++
       }
@@ -372,3 +373,15 @@ class CPURenderedFontAtlasPage extends FontAtlasPageBase<CPURenderedCachedGlyph>
   }
 }
 
+function computeContrastTable(contrast: number): Uint8ClampedArray {
+  const table = new Uint8ClampedArray(256);
+
+  for (let i=0; i<256; i++) {
+
+    table[i] = 255 * (i-contrast)/(255-contrast);
+
+    // table[i] = i < 128 ? 0 : 255;
+  }
+
+  return table;
+}
