@@ -269,7 +269,9 @@
 
 .ace_cursor-layer {
   z-index: 4;
-  mix-blend-mode: difference;
+  @if($extraterm-gpu-driver-workaround == "none") {
+    mix-blend-mode:difference;
+  }
 }
 
 $ace_ibeam_thickness: 1.5px;
@@ -281,7 +283,25 @@ $ace_ibeam_thickness: 1.5px;
   border-left: $ace_ibeam_thickness solid;
 
   border-color: $terminal-cursor-background-color;
-  mix-blend-mode: difference; 
+
+  @if($extraterm-gpu-driver-workaround == "none") {
+    mix-blend-mode: difference;
+    &.blink_state_alt {
+      opacity: 0.0;
+    }
+  }
+
+  @if($extraterm-gpu-driver-workaround == "no_blend") {
+    &.blink_state_alt {
+      border-color: #000000;
+      opacity: 0.5;
+
+      &::before {
+        border-color: #000000;
+        opacity: 0.5;
+      }
+    }
+  }
 
   &::before {
     content: " ";
@@ -304,15 +324,24 @@ $ace_ibeam_thickness: 1.5px;
 }
 
 .ace_selection {
+  position: absolute;
+  z-index: 5;
+
   background: $terminal-selection-background-color;
+
+  @if($extraterm-gpu-driver-workaround == "no_blend") {
+    opacity: 0.75;
+  }
 }
 
 .terminal-unfocused .ace_selection {
   background: $terminal-selection-unfocused-background-color
 }
 
-.ace_marker-layer {
-  mix-blend-mode: screen;
+@if($extraterm-gpu-driver-workaround == "none") {
+  .ace_marker-layer {
+    mix-blend-mode: screen;
+  }  
 }
 
 .ace_marker-layer .ace_bracket {
@@ -337,19 +366,9 @@ $ace_ibeam_thickness: 1.5px;
   opacity: 0.2;
 }
 
-.ace_smooth-blinking .ace_cursor {
-  -webkit-transition: opacity 0.18s;
-          transition: opacity 0.18s;
-}
-
 .ace_marker-layer .ace_step, .ace_marker-layer .ace_stack {
   position: absolute;
   z-index: 3;
-}
-
-.ace_marker-layer .ace_selection {
-  position: absolute;
-  z-index: 5;
 }
 
 .ace_marker-layer .ace_bracket {
