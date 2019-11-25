@@ -63,7 +63,8 @@ jobs:
         inputs:
           versionSpec: '10.11.0'
       - script: node -v
-      - script: dir C:\Users\VssAdministrator\.node-gyp
+      - script: dir C:/Users/VssAdministrator/.node-gyp
+        continueOnError: true
       - script: yarn install --frozen-lockfile
         displayName: "yarn install"
       - script: yarn run electron-rebuild-win32
