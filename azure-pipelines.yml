@@ -12,6 +12,7 @@ trigger:
 jobs:
   - job: commands_zip
     displayName: "Build commands.zip"
+    condition: False
     pool:
       vmImage: 'Ubuntu-18.04'
     steps:
@@ -33,6 +34,7 @@ jobs:
 
   - job: package_linux
     displayName: "Build Linux packages"
+    condition: False
     pool:
       vmImage: 'Ubuntu-18.04'
     steps:
@@ -67,9 +69,10 @@ jobs:
         displayName: "install nsis"
       - script: choco install zip -y
         displayName: "install zip"
-      - task: NodeTool@0
-        inputs:
-          versionSpec: '10.11.0'
+      - script: choco install nodejs --version=10.11.0
+        displayName: "Install nodejs"
+      - script: node --version
+      - script: yarn --version
       - script: yarn global add node-gyp
       - script: yarn install --frozen-lockfile
         displayName: "yarn install"
@@ -105,6 +108,7 @@ jobs:
 
   - job: package_macos
     displayName: "Build macOS packages"
+    condition: False
     pool:
       vmImage: 'macOS-10.14'
     steps:
