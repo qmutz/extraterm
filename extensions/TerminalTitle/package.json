@@ -16,7 +16,7 @@
   "dependencies": {
     "extraterm-trim-between-tags": "1.0.0",
     "he": "1.2.0",
-    "vue": "2.6.10",
+    "vue": "3.0.0",
     "vue-class-component": "6.3.2"
   },
   "devDependencies": {
