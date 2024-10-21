@@ -56,7 +56,7 @@
     "term-api": "1.0.0",
     "term-api-lineimpl": "1.0.0",
     "utf8": "2.1.2",
-    "vue": "2.6.10",
+    "vue": "3.0.0",
     "vue-class-component": "6.3.2",
     "xregexp": "4.2.4"
   },
