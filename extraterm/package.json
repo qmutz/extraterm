@@ -58,7 +58,7 @@
     "utf8": "2.1.2",
     "vue": "2.6.10",
     "vue-class-component": "6.3.2",
-    "xregexp": "4.2.4"
+    "xregexp": "4.3.0"
   },
   "devDependencies": {
     "@extraterm/extraterm-extension-api": "0.13.0",
